@@ -388,7 +388,6 @@ As a developer I'd like to implement a backend proxy implementation without bein
 Mitigations are - falling back to the in-tree proxy, or simply titrating logic over piece by piece if we find holes .  We don't think there are many of these those because there are 100s of networking tests, many of which test specific items like udp proxying, avoiding blackholes, service updating, scaling of pods, local routing logic for things like service topologies, and so on.
 
 - Story 5, while implementable from a development standpoint to make it easy to hack on new backends, hasnt been broadly tested in a production
-context and might need tooling like mTLS and so on, in order to be production ready for clouds and other user facing environments.
 
 ## Design Details
 
