@@ -365,6 +365,10 @@ As a Kubernetes maintainer, I'd like to add new proxies to kubernetes-sigs repos
 
 As an end user, I'd like to be able to easily test a Kubernetes backend's networking logic without plugging it into a real Kubernetes cluster, or maybe even use it to write networking rules that aren't directly provided by the Kubernetes API.
 
+#### Story 5
+
+As a developer I'd like to implement a backend proxy implementation without being dependent on the K8s API, and without creating any load on the Kubernetes API - either in edge networking scenarios, or in high scale scenarios.
+
 ### Notes/Constraints/Caveats (Optional)
 
 - sending the full-state could be resource consuming on big clusters, but it should still be O(1) to
@@ -378,6 +382,9 @@ As an end user, I'd like to be able to easily test a Kubernetes backend's networ
 - There may be magic functionality that is unpublished in the kube-proxy that we dont know about which we lose when doing this.  
 
 Mitigations are - falling back to the in-tree proxy, or simply titrating logic over piece by piece if we find holes .  We don't think there are many of these those because there are 100s of networking tests, many of which test specific items like udp proxying, avoiding blackholes, service updating, scaling of pods, local routing logic for things like service topologies, and so on.
+
+- Story 5, while implementable from a development standpoint to make it easy to hack on new backends, hasnt been broadly tested in a production
+context and might need tooling like mTLS and so on, in order to be production ready for clouds and other user facing environments.
 
 ## Design Details
 
