@@ -253,6 +253,10 @@ demonstrate the interest in a KEP within the wider Kubernetes community.
   are only used by kube-proxy (eg, `pkg/util/ipvs`,
   `pkg/util/conntrack`, `pkg/util/netsh`).
 
+- Provide initial material that demonstrates how to run this decoupled proxy implementation on
+separate nodes (i.e. with the "core service proxy brain" on *one* node, and a backend(s) on
+other nodes, where all of the K8s networking state space is sent, remotely over GRPC).
+
 ### Non-Goals
 
 - We Won't necessarily provide bulletproof NFT, eBPF, Userspace backends with parity to the core Windows kernel, IPTAbles, IPVS implementations.  
