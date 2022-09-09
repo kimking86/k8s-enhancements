@@ -755,25 +755,27 @@ on such methods.
 
 ### Test Plan
 
-<!--
-**Note:** *Not required until targeted at a release.*
+#### Automation for the standard service proxy scenarios
 
-Consider the following in developing a test plan for this enhancement:
-- Will there be e2e and integration tests, in addition to unit tests?
-- How will it be tested in isolation vs with other components?
+Upstream Kubernetes has a large set of 100s of tests which leverage service proxies, on different clouds, running
+in prow. By "pring" into Kubernetes, we'll get these tests, for free... 
 
-No need to outline all of the test cases, just the general strategy. Anything
-that would count as tricky in the implementation, and anything particularly
-challenging to test, should be called out.
+For each of our "completed" backends (iptables, ipvs, nft) KPNG currently runs
 
-All code is expected to have adequate tests (eventually with coverage
-expectations). Please adhere to the [Kubernetes testing guidelines][testing-guidelines]
-when drafting this test plan.
+- all sig-network tests which involve service proxying
+- all Conformance tests
 
-[testing-guidelines]: https://git.k8s.io/community/contributors/devel/sig-testing/testing.md
--->
+We of course must ensure we pass all the scalability tests which run in PROW default CI,
+and we must manually verify KPNG on all standard clouds, and especially, this is
+important since cloud kube proxy configurations my leverage command line options/configurations
+which arent needed in our CI/kind clusters.
 
-[ ] I/we understand the owners of the involved components may require updates to
+#### Manual verification of complex scenarios 
+
+We assert that some level of performance testing, manually, should be done since this is a
+significant architectural change, but we will iterate the details of that later on.
+
+[ x ] I/we understand the owners of the involved components may require updates to
 existing tests to make this code solid enough prior to committing the changes necessary
 to implement this enhancement.
 
